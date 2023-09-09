@@ -1,9 +1,11 @@
 #include<stdio.h>
 int main()
 {
-    puts("    |\\");
-    puts("   /| \\");
-    puts("  /_|__\\");
+    puts("     __");
+    puts("    |__|");
+    puts("   /|");
+    puts("  / |\\");
+    puts(" /__|_\\");
     puts("    |");
     puts("_________");
     puts("\\  ooo  /");
