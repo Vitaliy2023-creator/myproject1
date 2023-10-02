@@ -1,0 +1,13 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <locale.h>
+int main()
+{
+	setlocale(LC_CTYPE, "RUS");
+	float A,newA;
+	printf("Введите число: ");
+	scanf("%f", &A);
+	newA = (float)((A - (int)A)*1000)+ (float)(int)A / 100;
+	printf("%6.2f", newA);
+	return 0;
+}
