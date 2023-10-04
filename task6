@@ -1,0 +1,54 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include<locale.h>
+#include<math.h>
+void task6_1()
+{
+    int yeas;
+    printf("Введите год: ");
+    scanf("%d", &yeas);
+    if (!(yeas % 4))
+    {
+        printf("високосный\n");
+    }
+    else
+    {
+        printf("не високосный\n");
+    }
+    if (!(yeas % 4))
+    {
+        printf("Год %d високосный\n",yeas);
+    }
+    else
+    {
+        printf("Год %d не високосный\n", yeas);
+    }
+    if ((!(yeas % 4)&&(yeas%100))||!(yeas%400))
+    {
+        printf("Год %d високосный\n", yeas);
+    }
+    else
+    {
+        printf("Год %d не високосный\n", yeas);
+    }
+}
+void task6_2()
+{
+    float x;
+    printf("Введите x: ");
+    scanf("%f", &x);
+    printf("%f\n", x < 3.2?(pow(x, 4) + 9):((54 * pow(x, 4)) / ((-5 * x*x) + 7)));
+    
+}
+int main()
+{
+    setlocale(LC_CTYPE, "RUS");
+    //home2();
+    //home3();
+    //home4();
+    //task5_1();
+    //task5_2();
+    task6_1();
+    task6_2();
+    return 0;
+}
