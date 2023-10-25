@@ -1,0 +1,134 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <math.h>
+#include<locale.h>
+//6 вариант
+float area_triangle(int);
+void name(int a);
+void draw_triangle(float, char);
+void task10_3();
+double ln_x_2(double,int);
+double ln_x_3(double,double);
+void task10_2();
+int main()
+{
+	setlocale(LC_CTYPE, "RUS");
+	//task10_3();
+	task10_2();
+}
+float area_triangle(int h)
+{
+	float a = 2 * (float)h - 1;
+
+	return (float)h * a / 2;
+}
+void name(int a)
+{
+	switch (a)
+	{
+	case 3:
+		printf("Треугольник\n");
+		break;
+	case 4:
+		printf("Четырехугольник\n");
+		break;
+	case 5:
+		printf("Пятиугольник\n");
+		break;
+	}
+
+}
+void draw_triangle(float h, char a)
+{
+	int left, right;
+
+	left = right = (2 * h - 1) / 2;
+	for (int row = 0; row < h; row++)
+	{
+		for (int col = 0; col < right + 1; col++)
+		{
+
+			if ((col >= left) && (col <= right))
+				printf("%c", a);
+			else
+				printf(" ");
+
+
+		}
+		printf("\n");
+		left--;
+		right++;
+	}
+}
+void task10_3()
+{
+	int h;
+	int choice;
+	printf("Введите h: ");
+	scanf("%d", &h);
+	char a;
+	for (;;)
+	{
+
+		printf("1-рассчитать площадь,\n2-вывести определение фигуры,\n3-нарисовать фигуру,\n4-выйти\n");
+		scanf("%d", &choice);
+		if (choice == 4) break;
+		switch (choice)
+		{
+		case 1:
+			printf("Площадь треугольника равна %f\n", area_triangle(h));
+			break;
+		case 2:
+			name(3);
+			break;
+		case 3:
+			printf("Введите символ заполнения фигуры: ");
+			getchar();
+			scanf("%c", &a);
+			draw_triangle(h, a);
+			break;
+		}
+
+	}
+}
+double ln_x_2(double x,double N)
+{
+	double current = 2*(x-1)/(x+1);
+	double s = current;
+	for (int i = 3; i < 2*N; i += 2)
+	{
+		current *= ((i - 2) * 2 * (x - 1) * (x - 1)) / (i * (x + 1) * (x + 1));
+		s += current;
+	}
+	return s;
+}
+double ln_x_3(double x,double eps)
+{
+	double last;
+    double current = 2 * (x - 1) / (x + 1);
+	double s = current;
+	int N, i = 3;
+		do
+	{
+		last = current;
+		current = current * ((i - 2) * 2 * (x - 1) * (x - 1)) / (i * (x + 1) * (x + 1));
+		s += current;
+		i += 2;
+	} 
+	while (fabs(current - last) > eps);
+	return s;
+}
+void task10_2()
+{
+	double x, eps;
+	int N;
+	printf("Введите x: ");
+	scanf("%lf", &x);
+	printf("Введите N: ");
+	scanf("%d", &N);
+	printf("Введите eps: ");
+	scanf("%lf", &eps);
+	printf("ln x = %lf\n", log(x));
+	printf("ln x (сумма ряда с фиксированным количеством членов N) = %lf\n", ln_x_2(x, N));
+	printf("ln x (сумма ряда с заданной точностью eps) = %lf\n", ln_x_3(x, eps));
+}
