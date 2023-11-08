@@ -1,0 +1,139 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#define N 7
+#define CUSTOMERS 20
+#define MONTHS 12
+void task15_1()
+{
+	int row, col, num_of_col, max = -1;
+	printf("Введите количество строк (от 0 до 100): ");
+	scanf("%d", &row);
+	printf("Введите количество столбцов (от 0 до 100): ");
+	scanf("%d", &col);
+	int mass[100][100];
+	int i, j, k;
+	for (i = 0; i < row; i++)
+		for (j = 0; j < col; j++)
+			mass[i][j] = -1;
+	for (i = 0; i < row; i++)
+		for (j = 0; j < col; j++)
+			mass[i][j] = 1000 * j + i;
+	printf("    ");
+	for (k = 0; k < col; k++)
+	{
+		printf(" %6d|", k);
+
+	}
+	printf("\n___________________________________________________________________________________\n");
+	for (i = 0; i < row; i++)
+	{
+		printf("%2d |", i);
+		for (j = 0; j < col; j++)
+			printf(" %6d ", mass[i][j]);
+		printf("\n");
+	}
+	printf("Случайный элемент предпоследнего столбца: %d\n", mass[rand() % row][col - 2]);
+	printf("Введите номер столбца: ");
+	scanf("%d", &num_of_col);
+	for (i = 0; i < row; i++)
+		if (mass[i][num_of_col] > max) max = mass[i][num_of_col];
+	printf("Максимальный элемент в %d столбце: %d", num_of_col, max);
+}
+void task15_2()
+{
+	int mass[N][N],trans[N][N],i,j,counter_second=0,counter_par=0,i_max,j_max,max=-11;
+	printf("Исходная матрица: \n");
+	for (i = 0; i < N; i++)
+	{
+		for (j = 0; j < N; j++)
+		{
+			mass[i][j] = (int)(rand() % 20 - 10);
+			printf("%3d", mass[i][j]);
+		}
+		printf("\n");
+	}
+		
+	printf("\n");
+	printf("\n");
+	printf("Транспонированная матрица: \n");
+	for (i = 0; i < N; i++)
+	{
+		for (j = 0; j < N; j++)
+		{
+			trans[j][i] = mass[i][j];
+			
+		}
+		
+	}
+	for (i = 0; i < N; i++)
+	{
+		for (j = 0; j < N; j++)
+		{
+			
+			printf("%3d", trans[i][j]);
+		}
+		printf("\n");
+	}
+	for (i = 0; i < N; i++)
+	{
+		if (mass[i][1]<-5)
+			counter_second++;
+	}
+	printf("Количество элементов второго столбца меньших -5: %d\n", counter_second);
+	for (i = 1; i < N; i++)
+		for (j = 0; j < N; j++)
+			if (mass[i][j] == mass[i-1][j]) counter_par++;
+	printf("Количество пар одинаковых соседних элементов: %d\n", counter_par);
+	for (i = 0; i < N; i++)
+		for (j = 0; j < N; j++)
+			if (mass[i][j] >= max)
+			{
+				max = mass[i][j];
+				i_max = i;
+				j_max = j;
+			}
+	printf("Координаты максимального элемента : %d,%d\n", i_max, j_max);
+}
+void task15_home()
+{
+
+	int salary[CUSTOMERS][MONTHS],i,j,number,sum=0;
+	for (i = 0; i < CUSTOMERS; i++)
+		for (j = 0; j < MONTHS; j++)
+			salary[i][j] = rand()%40000 + 20000;
+	/*printf("Зарплата 20 человек за 12 месяцев(столбцы - месяцы, строки - люди)\n");
+	for (i = 0; i < CUSTOMERS; i++)
+	{
+		for (j = 0; j < MONTHS; j++)
+			printf("%6d", salary[i][j]);
+		printf("\n");
+	}*/
+	while (1)
+	{
+		printf("Введите номер человека(для выхода из цикла введите 0):  ");
+		scanf("%d", &number);
+		if (number == 0) break; 
+		if ((number >= 0) && (number <= 20))
+		{
+			for (j = 0; j < MONTHS; j++)
+			{
+				sum += salary[number - 1][j];
+			}
+			printf("Зарплата %d человека, полученная за год: %d\n", number, sum);
+		}
+		else
+		{
+			printf("Нет такого номера! Введите число от 1 до 20!\n");
+		}
+	}
+	
+}
+int main()
+{
+	setlocale(LC_CTYPE, "RUS");
+	//task15_1();
+	//task15_2();
+	task15_home();
+}
