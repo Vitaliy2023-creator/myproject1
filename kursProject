@@ -1,0 +1,42 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <locale.h>
+void Sort(int *rating);
+int Search_version(int *version);
+int Search_developer(int *developer);
+void Input(char *filename,char *message);
+void Output();
+int Check();
+struct DataBase
+{
+    char *instrument_name;
+    float version;
+    char *developer;
+    char* description;
+    int year;
+};
+int main()
+{
+    setlocale(LC_CTYPE, "RUS");
+    // строки для записи
+    char* message = "PostgreSQL 15.3 Майкл_Стоунбрейкер Объектно-реляционная_система_управления_базами_данных 1996\n\
+Python 3.12 Гвидо_Ван_Россум Язык_программирования 1991\nTableau 22.3 Кристиан_Шабо Сервис_визуализации_данных. 2003\n\
+DBeaver 23.2 open_source_community Бесплатная_программа_для_работы_с_СУБД 2011\n\
+Excel 19.0 Microsoft Программа_для_работы_с_электронными_таблицами 1985	";
+    // файл для записи
+    char* filename = "База данных.txt";
+    // запись в файл
+    Input(filename, message);
+    printf("Введите 1 - для сортировки массива, 2 - для поиска элемента по Версии,\
+ 3 - для поиска элемента по  Разработчику: ");
+}
+void Input(char* filename, char* message)
+{
+    FILE* fp = fopen(filename, "a+");
+    if (fp)
+    {
+        // записываем строку
+        fputs(message, fp);
+        fclose(fp);
+    }
+}
